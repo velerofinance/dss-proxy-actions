@@ -13,7 +13,7 @@ import {DSValue} from "ds-value/value.sol";
 import {DssCdpManager} from "dss-cdp-manager/DssCdpManager.sol";
 import {GetCdps} from "dss-cdp-manager/GetCdps.sol";
 import {ProxyRegistry, DSProxyFactory, DSProxy} from "proxy-registry/ProxyRegistry.sol";
-import {WETH9_} from "ds-weth/weth9.sol";
+import {WVLX9_} from "ds-weth/weth9.sol";
 
 contract ProxyCalls {
     DSProxy proxy;
@@ -274,14 +274,14 @@ contract DssProxyActionsTest is DssDeployTestBase, ProxyCalls {
     GNT gnt;
     DSValue pipGNT;
     ProxyRegistry registry;
-    WETH9_ realWvlx;
+    WVLX9_ realWvlx;
 
     function setUp() public {
         super.setUp();
         deployKeepAuth();
 
         // Create a real WVLX token and replace it with a new adapter in the vat
-        realWvlx = new WETH9_();
+        realWvlx = new WVLX9_();
         this.deny(address(vat), address(vlxJoin));
         vlxJoin = new GemJoin(address(vat), "VLX", address(realWvlx));
         this.rely(address(vat), address(vlxJoin));
